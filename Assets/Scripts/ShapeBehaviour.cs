@@ -32,7 +32,7 @@ public class ShapeBehaviour : MonoBehaviour
         }
     }
 
-    // Срабатывает, когда на объект кликают мышкой
+    /// Срабатывает, когда на объект кликают мышкой
     void OnMouseDown()
     {
         isMoving = !isMoving;
