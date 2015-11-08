@@ -34,6 +34,7 @@ public class ShapeBehaviour : MonoBehaviour
         }
     }
 
+    // Срабатывает при нажатии мышкой на объект
     void OnMouseDown()
     {
         isMoving = !isMoving;
