@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Security.Cryptography.X509Certificates;
 
 public class ShapeBehaviour : MonoBehaviour
 {
@@ -34,6 +32,7 @@ public class ShapeBehaviour : MonoBehaviour
         }
     }
 
+    // Срабатывает, когда на объект кликают мышкой
     void OnMouseDown()
     {
         isMoving = !isMoving;
