@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class ShapeBehaviour : MonoBehaviour
 {
-
     public float speed = 0.5f;
 
     public Vector3 direction;
@@ -10,17 +10,17 @@ public class ShapeBehaviour : MonoBehaviour
 
     private bool isMoving = true;
     public bool isFinalPosition;
-	
+
     /// Создает начальные условия
-	void Start ()
+    void Start ()
     {
-        direction = GameObject.Find(shape_name + "ChangeDirection1").GetComponent<DirChanger>().transform.position
-                    - transform.position;
+        direction = GameObject.Find(shape_name + "ChangeDirection1").GetComponent<DirChanger>().transform.position - transform.position;
+
         isFinalPosition = false;
     }
-	
+
     /// Обновляется несколько раз за кадр
-	void FixedUpdate () {
+    void FixedUpdate () {
         if(isMoving)
             transform.Translate(direction * Time.deltaTime * speed);
 	}
