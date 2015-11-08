@@ -70,6 +70,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DirChanger.cs" />
     <Compile Include="Assets\Scripts\ShapeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\TestLevel_Manager.cs" />
+    <Compile Include="Assets\Scripts\TriggerCheck.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
