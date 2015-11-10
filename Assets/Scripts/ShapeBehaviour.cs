@@ -8,7 +8,7 @@ public class ShapeBehaviour : MonoBehaviour
     public Vector3 direction;
     public string shape_name = "Shape";
 
-    private bool isMoving = true;
+    public bool isMoving = true;
     public bool isFinalPosition;
 
     /// Создает начальные условия

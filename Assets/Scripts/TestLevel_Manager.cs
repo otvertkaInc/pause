@@ -6,10 +6,21 @@ public class TestLevel_Manager : MonoBehaviour
 {
     void OnGUI()
     {
-        //List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
-        
-        //if(isAllTrue(shapes))
-            GUI.Label(new Rect(10, 10, 100, 20), "You win!");
+        List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
+        GUI.color = Color.yellow;
+        GUI.backgroundColor = Color.black;
+        bool b = true;
+        for (int i = 0; i < shapes.Count; i++)
+            if (shapes[i].isMoving)
+            {
+                b = !b;
+                break;
+            }
+        if (isAllTrue(shapes) && b)
+            if (GUI.Button(new Rect(540, 100, 300, 300), "Хочешь 2 уровень? Давай бабки!"))
+            {
+                print("Give me Money!");
+            }
     }
 
     /// Проверяет все ли фигуры на своих финальных позициях
@@ -17,11 +28,10 @@ public class TestLevel_Manager : MonoBehaviour
     {
         bool res = true;
         int i = 0;
-        while(res & (i < shapes.Count))
+        while (res && (i < shapes.Count))
         {
-            res &= shapes[i].isFinalPosition;
+            res &= shapes[i++].isFinalPosition;
         }
-
         return res;
     }
 }
