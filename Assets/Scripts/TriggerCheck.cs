@@ -27,7 +27,7 @@ public class TriggerCheck : MonoBehaviour {
         }
     }
 
-    /// Срабатывает при входе объекта в триггер
+    /// Срабатывает при выходе объекта в триггер
     void OnTriggerExit2D(Collider2D col)
     {
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();

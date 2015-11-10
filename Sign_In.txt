@@ -1,2 +1,0 @@
-login: otvertka.inc@yandex.ru
-password: EruSalimskii666

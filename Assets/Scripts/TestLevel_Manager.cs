@@ -18,7 +18,7 @@ public class TestLevel_Manager : MonoBehaviour
                 break;
             }
         if (isAllTrue(shapes) && b)
-            if (GUI.Button(new Rect(540, 100, 300, 300), "Хочешь 2 уровень? Давай бабки!"))
+            if (GUI.Button(new Rect(Screen.width/2 - 150, Screen.height/2 - 150, 300, 300), "Хочешь 2 уровень? Давай бабки!"))
             {
                 print("Give me Money!");
             }
