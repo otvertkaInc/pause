@@ -28,6 +28,8 @@ public class ShapeBehaviour : MonoBehaviour
     /// Срабатывает, когда на объект кликают мышкой
     void OnMouseDown()
     {
-        isMoving = !isMoving;
+        TestLevel_Manager ts = GameObject.FindObjectOfType<TestLevel_Manager>();
+        if (ts.need_mov)
+            isMoving = !isMoving;
     }
 }

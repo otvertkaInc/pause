@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class TestLevel_Manager : MonoBehaviour
 {
+    public bool need_mov = true;
     void OnGUI()
     {
         List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
@@ -32,6 +33,14 @@ public class TestLevel_Manager : MonoBehaviour
         {
             res &= shapes[i++].isFinalPosition;
         }
+        bool bol = false;
+        for (int j = 0; j < shapes.Count; ++j)
+            if (shapes[j].isMoving || !shapes[j].isFinalPosition)
+            {
+                bol = !bol;
+                break;
+            }
+        need_mov = bol;
         return res;
     }
 }
