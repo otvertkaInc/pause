@@ -3,16 +3,8 @@ using System.Collections;
 
 public class DirChanger : MonoBehaviour
 {
-
+    /// <summary>
+    /// Направление, до следующего ChangeCirection
+    /// </summary>
     public Vector3 new_direction;
-
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

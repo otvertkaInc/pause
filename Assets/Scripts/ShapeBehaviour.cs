@@ -3,33 +3,84 @@ using System.Collections.Generic;
 
 public class ShapeBehaviour : MonoBehaviour
 {
-    public float speed = 0.5f;
+    /// <summary>
+    /// Скорость движения
+    /// </summary>
+    public float Speed = 0.5f;
 
+    /// <summary>
+    /// Направление движения
+    /// </summary>
     public Vector3 direction;
+
+    /// <summary>
+    /// Название фигуры (с мальенькой буквы)
+    /// </summary>
     public string shape_name = "Shape";
 
+    /// <summary>
+    /// Проверяет, находится ли объект в движении
+    /// </summary>
     public bool isMoving = true;
+
+    /// <summary>
+    /// Проверяет на финальной ли позиции фигура
+    /// </summary>
     public bool isFinalPosition;
 
+    /// <summary>
     /// Создает начальные условия
-    void Start ()
+    /// </summary>
+    void Start()
     {
         direction = GameObject.Find(shape_name + "ChangeDirection1").GetComponent<DirChanger>().transform.position - transform.position;
 
         isFinalPosition = false;
     }
 
+    /// <summary>
     /// Обновляется несколько раз за кадр
-    void FixedUpdate () {
-        if(isMoving)
-            transform.Translate(direction * Time.deltaTime * speed);
-	}
+    /// </summary>
+    void FixedUpdate()
+    {
+        if (isMoving)
+            GetComponent<Rigidbody2D>().velocity = direction * Speed;
+        else
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
 
+    /// <summary>
     /// Срабатывает, когда на объект кликают мышкой
+    /// </summary>
     void OnMouseDown()
     {
         GUI_level_manager ts = GameObject.FindObjectOfType<GUI_level_manager>();
         if (ts.need_mov)
-            isMoving = !isMoving;
+        {
+            if (!isMoving)
+            {
+                ShapeRotation rot = GetComponent<ShapeRotation>();
+                if (rot != null)
+                {
+                    if (!rot.isRotate)
+                    {
+                        // Если объект не двигается И не вращается, значит этот клик его активирует,
+                        // как активированный уголь
+                        rot.isRotate = true;
+                        isMoving = true;
+                    }
+                    else
+                        rot.isRotate = false;
+                }
+                else
+                {
+                    isMoving = true;
+                }
+            }
+            else
+            {
+                isMoving = false;
+            }
+        }
     }
 }

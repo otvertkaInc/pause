@@ -1,18 +1,10 @@
 ﻿using UnityEngine;
 
-public class TriggerCheck : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+public class TriggerCheck : MonoBehaviour
+{
+    /// <summary>
     /// Срабатывает при входе объекта в триггер
+    /// </summary>
     void OnTriggerEnter2D(Collider2D col)
     {
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
@@ -27,7 +19,9 @@ public class TriggerCheck : MonoBehaviour {
         }
     }
 
-    /// Срабатывает при выходе объекта в триггер
+    /// <summary>
+    /// Срабатывает при выходе объекта из триггера
+    /// </summary>
     void OnTriggerExit2D(Collider2D col)
     {
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
