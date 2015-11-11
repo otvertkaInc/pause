@@ -50,22 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DirChanger.cs" />
-    <Compile Include="Assets\Scripts\GUI_test.cs" />
+    <Compile Include="Assets\Scripts\GUI_level_manager.cs" />
+    <Compile Include="Assets\Scripts\GUI_main_menu.cs" />
     <Compile Include="Assets\Scripts\ShapeBehaviour.cs" />
-    <Compile Include="Assets\Scripts\TestLevel_Manager.cs" />
     <Compile Include="Assets\Scripts\TriggerCheck.cs" />
     <Compile Include="Assets\Scripts\levelController.cs" />
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

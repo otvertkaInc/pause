@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\DirChanger.cs" />
-     <Compile Include="Assets\Scripts\GUI_test.cs" />
+     <Compile Include="Assets\Scripts\GUI_main_menu.cs" />
      <Compile Include="Assets\Scripts\ShapeBehaviour.cs" />
      <Compile Include="Assets\Scripts\TestLevel_Manager.cs" />
      <Compile Include="Assets\Scripts\TriggerCheck.cs" />
