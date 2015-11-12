@@ -12,6 +12,7 @@ public class ShapeBehaviour : MonoBehaviour
     //public DateTime Start;
     //время конца
     //public DateTime Stop;
+
     /// <summary>
     /// Направление движения
     /// </summary>
@@ -61,14 +62,13 @@ public class ShapeBehaviour : MonoBehaviour
     {
         GUI_level_manager ts = FindObjectOfType<GUI_level_manager>();
         ShapeRotation rot = GetComponent<ShapeRotation>();
-
+        
         if (ts.need_mov)
         {
             if (ts.moveMode)
                 isMoving = !isMoving;
             if (ts.rotateMode && (rot != null))
                 rot.isRotate = !rot.isRotate;
-
         }
     }
 }

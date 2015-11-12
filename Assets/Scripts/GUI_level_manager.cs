@@ -9,10 +9,14 @@ public class GUI_level_manager : MonoBehaviour
     public bool moveMode;
     public Texture2D ZVEZDA_FON;
 
+    private bool flag; // флаг
+
     void Start()
     {
         rotateMode = false;
         moveMode = true;
+
+        flag = true;
     }
 
     void OnGUI()
@@ -35,32 +39,38 @@ public class GUI_level_manager : MonoBehaviour
         GUI.backgroundColor = Color.black;
         if (isAllTrue(shapes, Sh_r))
         {
-             GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 115, 200, 100), ZVEZDA_FON);
-             if (Application.loadedLevel == (Application.levelCount - 1))
-             {
-                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
-                 {
-                     Application.LoadLevel(0);
-                 }
+            if (flag)
+            {
+                flag = false;
+                //FindObjectOfType<levelController>().moveToFinalPos(shapes); // Движение всех фигур к своим финальным позициям
+            }
 
-                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 300, 300), "Game complete!"))
-                 {
-
-                 }
-             }
-
-             else
-             {
-                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 200, 25), "Next level"))
-                 {
-                     Application.LoadLevel(Application.loadedLevel + 1);
-                 }
-
-                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 250, 200, 50), "Level complete!"))
-                 {
-
-                 }
-             }
+            GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 115, 200, 100), ZVEZDA_FON);
+            if (Application.loadedLevel == (Application.levelCount - 1))
+            {
+                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
+                {
+                    Application.LoadLevel(0);
+                }
+            
+                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 300, 300), "Game complete!"))
+                {
+                
+                }
+            }
+        
+            else
+            {
+                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 200, 25), "Next level"))
+                {
+                    Application.LoadLevel(Application.loadedLevel + 1);
+                }
+            
+                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 250, 200, 50), "Level complete!"))
+                {
+                
+                }
+            }
         }
     }
 
@@ -69,11 +79,13 @@ public class GUI_level_manager : MonoBehaviour
     {
         bool bol = false;
         for (int j = 0; j < shapes.Count; ++j)
+        {
             if (shapes[j].isMoving || !shapes[j].isFinalPosition)
             {
                 bol = !bol;
                 break;
             }
+        }
         if (!bol)
         {
             for (int i = 0; i < sh_r.Count; ++i)
@@ -85,7 +97,7 @@ public class GUI_level_manager : MonoBehaviour
                 }
             }
         }
-            need_mov = bol;
+        need_mov = bol;
         return !bol;
     }
 }
