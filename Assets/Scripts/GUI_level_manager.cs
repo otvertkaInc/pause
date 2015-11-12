@@ -8,17 +8,18 @@ public class GUI_level_manager : MonoBehaviour
     void OnGUI()
     {
         List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
+        List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
         GUI.color = Color.yellow;
         GUI.backgroundColor = Color.black;
-        bool b = true;
-        for (int i = 0; i < shapes.Count; i++)
-            if (shapes[i].isMoving)
+        //[говнокод] проверка на то, не вертится ли корабль будучи на месте
+        bool c = true;
+        for (int i = 0; i < Sh_r.Count; i++)
+           if (!Sh_r[i].isFinalRotation || Sh_r[i].isRotate)
             {
-                b = !b;
-                break;
+               c = !c;
+               break;
             }
-
-        if (isAllTrue(shapes) && b)
+        if (isAllTrue(shapes) && c)
         {
             if (Application.loadedLevel == (Application.levelCount - 1))
             {
@@ -66,6 +67,6 @@ public class GUI_level_manager : MonoBehaviour
                 break;
             }
         need_mov = bol;
-        return res;
+        return res && !bol;
     }
 }

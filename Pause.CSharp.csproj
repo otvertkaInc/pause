@@ -51,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -69,8 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DirChanger.cs" />
+    <Compile Include="Assets\Scripts\GUI_level_manager.cs" />
+    <Compile Include="Assets\Scripts\GUI_main_menu.cs" />
+    <Compile Include="Assets\Scripts\RotateCheck.cs" />
     <Compile Include="Assets\Scripts\ShapeBehaviour.cs" />
-    <Compile Include="Assets\Scripts\TestLevel_Manager.cs" />
+    <Compile Include="Assets\Scripts\ShapeRotation.cs" />
     <Compile Include="Assets\Scripts\TriggerCheck.cs" />
     <Compile Include="Assets\Scripts\levelController.cs" />
   </ItemGroup>
