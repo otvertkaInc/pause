@@ -35,6 +35,7 @@ public class ShapeBehaviour : MonoBehaviour
     {
         direction = GameObject.Find(shape_name + "ChangeDirection1").GetComponent<DirChanger>().transform.position - transform.position;
 
+        direction = direction.normalized;
         isFinalPosition = false;
     }
 
@@ -54,33 +55,16 @@ public class ShapeBehaviour : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        GUI_level_manager ts = GameObject.FindObjectOfType<GUI_level_manager>();
+        GUI_level_manager ts = FindObjectOfType<GUI_level_manager>();
+        ShapeRotation rot = GetComponent<ShapeRotation>();
+
         if (ts.need_mov)
         {
-            if (!isMoving)
-            {
-                ShapeRotation rot = GetComponent<ShapeRotation>();
-                if (rot != null)
-                {
-                    if (!rot.isRotate)
-                    {
-                        // Если объект не двигается И не вращается, значит этот клик его активирует,
-                        // как активированный уголь
-                        rot.isRotate = true;
-                        isMoving = true;
-                    }
-                    else
-                        rot.isRotate = false;
-                }
-                else
-                {
-                    isMoving = true;
-                }
-            }
-            else
-            {
-                isMoving = false;
-            }
+            if (ts.moveMode)
+                isMoving = !isMoving;
+            if (ts.rotateMode && (rot != null))
+                rot.isRotate = !rot.isRotate;
+
         }
     }
 }

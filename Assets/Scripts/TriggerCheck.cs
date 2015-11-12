@@ -10,7 +10,7 @@ public class TriggerCheck : MonoBehaviour
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
         if (col.name.StartsWith(shape.shape_name + "ChangeDirection"))
         {
-            shape.direction = col.GetComponent<DirChanger>().new_direction - transform.position;
+            shape.direction = (col.GetComponent<DirChanger>().new_direction - transform.position).normalized;
         }
 
         if (col.name.StartsWith(shape.shape_name + "RightPosition"))

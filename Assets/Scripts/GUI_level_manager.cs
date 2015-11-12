@@ -5,21 +5,34 @@ public class GUI_level_manager : MonoBehaviour
 {
     public bool need_mov = true;
 
+    public bool rotateMode;
+    public bool moveMode;
+
+    void Start()
+    {
+        rotateMode = false;
+        moveMode = true;
+    }
+
     void OnGUI()
     {
+        if (GUI.Button(new Rect(Screen.width / 4, 3*Screen.height / 4, 100, 25), "MoveMode"))
+        {
+            moveMode = true;
+            rotateMode = false;
+        }
+
+        if (GUI.Button(new Rect(Screen.width / 4 - 105, 3*Screen.height / 4, 100, 25), "RoatateMode"))
+        {
+            moveMode = false;
+            rotateMode = true;
+        }
+
         List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
         List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
         GUI.color = Color.yellow;
         GUI.backgroundColor = Color.black;
-        //[говнокод] проверка на то, не вертится ли корабль будучи на месте
-        bool c = true;
-        for (int i = 0; i < Sh_r.Count; i++)
-           if (!Sh_r[i].isFinalRotation || Sh_r[i].isRotate)
-            {
-               c = !c;
-               break;
-            }
-        if (isAllTrue(shapes) && c)
+        if (isAllTrue(shapes, Sh_r))
         {
             if (Application.loadedLevel == (Application.levelCount - 1))
             {
@@ -49,16 +62,10 @@ public class GUI_level_manager : MonoBehaviour
 
         }
     }
-            
+
     /// Проверяет все ли фигуры на своих финальных позициях
-    bool isAllTrue(List<ShapeBehaviour> shapes)
+    bool isAllTrue(List<ShapeBehaviour> shapes, List<ShapeRotation> sh_r)
     {
-        bool res = true;
-        int i = 0;
-        while (res && (i < shapes.Count))
-        {
-            res &= shapes[i++].isFinalPosition;
-        }
         bool bol = false;
         for (int j = 0; j < shapes.Count; ++j)
             if (shapes[j].isMoving || !shapes[j].isFinalPosition)
@@ -66,7 +73,18 @@ public class GUI_level_manager : MonoBehaviour
                 bol = !bol;
                 break;
             }
-        need_mov = bol;
-        return res && !bol;
+        if (!bol)
+        {
+            for (int i = 0; i < sh_r.Count; ++i)
+            {
+                if (!sh_r[i].isFinalRotation || sh_r[i].isRotate)
+                {
+                    bol = !bol;
+                    break;
+                }
+            }
+        }
+            need_mov = bol;
+        return !bol;
     }
 }
