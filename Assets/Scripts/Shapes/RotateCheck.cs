@@ -3,17 +3,17 @@ using System.Collections;
 
 public class RotateCheck : MonoBehaviour
 {
+    public bool RotateFinalPosition = false;
+
     /// <summary>
     /// Срабатывает при входе объекта в триггер
     /// </summary>
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("OnTriggerEnter2D RotateCheck");
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
         if (col.name.StartsWith(shape.shape_name + "RightRotation"))
         {
-            Debug.Log("On if RotateCheck");
-            GetComponentInParent<ShapeRotation>().isFinalRotation = true;
+            RotateFinalPosition = true;
         }
     }
 
@@ -22,10 +22,9 @@ public class RotateCheck : MonoBehaviour
     /// </summary>
     void OnTriggerExit2D(Collider2D col)
     {
-        Debug.Log("OnTriggerExit2D RotateCheck");
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
 
         if (col.name.StartsWith(shape.shape_name + "RightRotation"))
-            GetComponentInParent<ShapeRotation>().isFinalRotation = false;
+            RotateFinalPosition = false;
     }
 }

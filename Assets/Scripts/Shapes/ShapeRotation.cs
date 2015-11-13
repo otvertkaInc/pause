@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class ShapeRotation : MonoBehaviour
 {
@@ -30,5 +31,10 @@ public class ShapeRotation : MonoBehaviour
     {
         if (isRotate)
             transform.Rotate(new Vector3(0f, 0f, SpeedRotation));
+
+        List<RotateCheck> rc = new List<RotateCheck>(GetComponentsInChildren<RotateCheck>());
+        isFinalRotation = true;
+        for (int i = 0; (i < rc.Count) && isFinalRotation; ++i)
+            isFinalRotation &= rc[i].RotateFinalPosition;
     }
 }

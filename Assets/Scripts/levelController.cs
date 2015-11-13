@@ -18,7 +18,7 @@ public class levelController : MonoBehaviour
     /// <summary>
     /// Движение всех фигур к своим финальным позициям (уровень пройден)
     /// </summary>
-    public void moveToFinalPos(List<ShapeBehaviour> shapes)
+    public void moveToFinalPos(List<ShapeMovement> shapes)
     {
         for (int i = 0; i < shapes.Count; ++i)
         {

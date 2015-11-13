@@ -7,7 +7,7 @@ public class TriggerCheck : MonoBehaviour
     /// </summary>
     void OnTriggerEnter2D(Collider2D col)
     {
-        ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
+        ShapeMovement shape = GetComponentInParent<ShapeMovement>();
         if (col.name.StartsWith(shape.shape_name + "ChangeDirection"))
         {
             shape.direction = (col.GetComponent<DirChanger>().new_direction - transform.position).normalized;
@@ -24,7 +24,7 @@ public class TriggerCheck : MonoBehaviour
     /// </summary>
     void OnTriggerExit2D(Collider2D col)
     {
-        ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
+        ShapeMovement shape = GetComponentInParent<ShapeMovement>();
         if (col.name.StartsWith(shape.shape_name + "RightPosition"))
         {
             shape.isFinalPosition = false;

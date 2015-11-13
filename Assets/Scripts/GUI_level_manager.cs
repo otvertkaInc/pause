@@ -7,7 +7,7 @@ public class GUI_level_manager : MonoBehaviour
 
     public bool rotateMode;
     public bool moveMode;
-    public Texture2D ZVEZDA_FON;
+    public Texture2D StarTexture2D; // Переименовал
 
     private bool flag; // флаг
 
@@ -33,7 +33,7 @@ public class GUI_level_manager : MonoBehaviour
             rotateMode = true;
         }
 
-        List<ShapeBehaviour> shapes = new List<ShapeBehaviour>(FindObjectsOfType<ShapeBehaviour>());
+        List<ShapeMovement> shapes = new List<ShapeMovement>(FindObjectsOfType<ShapeMovement>());
         List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
         GUI.color = Color.yellow;
         GUI.backgroundColor = Color.black;
@@ -45,7 +45,7 @@ public class GUI_level_manager : MonoBehaviour
                 //FindObjectOfType<levelController>().moveToFinalPos(shapes); // Движение всех фигур к своим финальным позициям
             }
 
-            GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 115, 200, 100), ZVEZDA_FON);
+            GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 115, 200, 100), StarTexture2D);
             if (Application.loadedLevel == (Application.levelCount - 1))
             {
                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
@@ -75,7 +75,7 @@ public class GUI_level_manager : MonoBehaviour
     }
 
     /// Проверяет все ли фигуры на своих финальных позициях
-    bool isAllTrue(List<ShapeBehaviour> shapes, List<ShapeRotation> sh_r)
+    bool isAllTrue(List<ShapeMovement> shapes, List<ShapeRotation> sh_r)
     {
         bool bol = false;
         for (int j = 0; j < shapes.Count; ++j)
