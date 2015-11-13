@@ -3,10 +3,43 @@ using System.Collections.Generic;
 
 public class levelController : MonoBehaviour
 {
+    /// <summary>
+    /// Массив ChangeDirection'ов для треугольника
+    /// </summary>
     private List<DirChanger> triangle_changes;
+
+    /// <summary>
+    /// Массив ChangeDirection'ов для окружности
+    /// </summary>
     private List<DirChanger> circle_changes;
 
     private string shape;
+
+    /// <summary>
+    /// Движение всех фигур к своим финальным позициям (уровень пройден)
+    /// </summary>
+    public void moveToFinalPos(List<ShapeBehaviour> shapes)
+    {
+        for (int i = 0; i < shapes.Count; ++i)
+        {
+            shapes[i].isMoving = true;
+            Vector3 direction = (GameObject.Find(shapes[i].shape_name + "RightPosition").transform.position - shapes[i].transform.position).normalized;
+            shapes[i].direction = direction;
+            //shapes[i].GetComponent<Rigidbody2D>().velocity = direction * 0.5f;
+            //shapes[i].isMoving = false;
+
+                /*
+                if (shapes[i].GetComponent<ShapeRotation>() != null) 
+                {
+                    List<ShapeRotation> rotates = new List<ShapeRotation>(GameObject.Find(shapes[i].shape_name + "RightPosition").GetComponentsInChildren<ShapeRotation>());
+                    for (int j = 0; j < rotates.Count; ++j)
+                    {
+                        //shapes[i].GetComponent
+                    }
+                }
+                */
+        }
+    }
 
     void Start()
     {
@@ -27,5 +60,6 @@ public class levelController : MonoBehaviour
         {
             circle_changes[i].new_direction = circle_changes[(i + 1) % count_circle].transform.position;
         }
+
     }
 }

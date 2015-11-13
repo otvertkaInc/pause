@@ -8,6 +8,11 @@ public class ShapeBehaviour : MonoBehaviour
     /// </summary>
     public float Speed = 0.5f;
 
+    //время начала
+    //public DateTime Start;
+    //время конца
+    //public DateTime Stop;
+
     /// <summary>
     /// Направление движения
     /// </summary>
@@ -33,8 +38,8 @@ public class ShapeBehaviour : MonoBehaviour
     /// </summary>
     void Start()
     {
+      //  Start = DateTime.Now;
         direction = GameObject.Find(shape_name + "ChangeDirection1").GetComponent<DirChanger>().transform.position - transform.position;
-
         direction = direction.normalized;
         isFinalPosition = false;
     }
@@ -57,14 +62,13 @@ public class ShapeBehaviour : MonoBehaviour
     {
         GUI_level_manager ts = FindObjectOfType<GUI_level_manager>();
         ShapeRotation rot = GetComponent<ShapeRotation>();
-
+        
         if (ts.need_mov)
         {
             if (ts.moveMode)
                 isMoving = !isMoving;
             if (ts.rotateMode && (rot != null))
                 rot.isRotate = !rot.isRotate;
-
         }
     }
 }

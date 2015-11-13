@@ -8,7 +8,7 @@ public class RotateCheck : MonoBehaviour
     /// </summary>
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("OnTriggerEnter2D RotateCheck"); // Он почему-то сюда не заходит :(
+        Debug.Log("OnTriggerEnter2D RotateCheck");
         ShapeBehaviour shape = GetComponentInParent<ShapeBehaviour>();
         if (col.name.StartsWith(shape.shape_name + "RightRotation"))
         {
