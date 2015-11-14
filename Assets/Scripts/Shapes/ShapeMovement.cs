@@ -27,6 +27,11 @@ public class ShapeMovement : MonoBehaviour
     public bool isFinalPosition;
 
     /// <summary>
+    /// Звук вызывается при нажатии на объект
+    /// </summary>
+    public AudioClip click;
+
+    /// <summary>
     /// Создает начальные условия
     /// </summary>
     void Start ()
@@ -47,5 +52,14 @@ public class ShapeMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = direction * Speed;
         else
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
+
+    /// <summary>
+    /// Меняет движение на остановку и наоборот
+    /// </summary>
+    public void ChangeMove()
+    {
+        isMoving = !isMoving;
+        GetComponent<AudioSource>().PlayOneShot(click);
     }
 }

@@ -9,6 +9,8 @@ public class GUI_level_manager : MonoBehaviour
     public bool moveMode;
     public Texture2D StarTexture2D; // Переименовал
 
+    
+
     private bool flag; // флаг
 
     void Start()
@@ -86,6 +88,7 @@ public class GUI_level_manager : MonoBehaviour
                 break;
             }
         }
+
         if (!bol)
         {
             for (int i = 0; i < sh_r.Count; ++i)

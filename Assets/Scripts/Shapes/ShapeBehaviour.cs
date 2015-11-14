@@ -41,9 +41,9 @@ public class ShapeBehaviour : MonoBehaviour
         if (ts.need_mov)
         {
             if (ts.moveMode && (sh != null))
-                sh.isMoving = !sh.isMoving;
+                sh.ChangeMove(); // Заменил на ф-цию, для более легкого доступа к звукам
             if (ts.rotateMode && (rot != null))
-                rot.isRotate = !rot.isRotate;
+                rot.ChangeRotate(); // Аналогично
         }
     }
 }

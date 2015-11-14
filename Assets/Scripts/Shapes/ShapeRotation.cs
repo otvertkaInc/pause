@@ -20,6 +20,11 @@ public class ShapeRotation : MonoBehaviour
     public bool isFinalRotation;
 
     /// <summary>
+    /// Звук вызывается при нажатии на объект
+    /// </summary>
+    public AudioClip click;
+
+    /// <summary>
     /// Создает начальные условия
     /// </summary>
     void Start()
@@ -36,5 +41,14 @@ public class ShapeRotation : MonoBehaviour
         isFinalRotation = true;
         for (int i = 0; (i < rc.Count) && isFinalRotation; ++i)
             isFinalRotation &= rc[i].RotateFinalPosition;
+    }
+
+    /// <summary>
+    /// Меняет поворот на остановку и наоборот
+    /// </summary>
+    public void ChangeRotate()
+    {
+        isRotate = !isRotate;
+        GetComponent<AudioSource>().PlayOneShot(click);
     }
 }
