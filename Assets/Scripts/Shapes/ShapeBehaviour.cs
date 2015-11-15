@@ -28,6 +28,25 @@ public class ShapeBehaviour : MonoBehaviour
       //  Start = DateTime.Now;
     }
 
+    public Vector3 Center()
+    {
+        List<Transform> center = new List<Transform>(GetComponentsInChildren<Transform>());
+        int ind = 0;
+
+        // Предполагается, что RotateCenter у объекта всего один
+        for (int i = 1; i < center.Count; ++i)
+        {
+            if (center[i].name == "Center")
+            {
+                ind = i;
+                break;
+            }
+        }
+
+        // Все будет работать! Если у объекта нет RotateCenter, то вернется своей собственный центр
+        return center[ind].position;
+    }
+
     /// <summary>
     /// Срабатывает, когда на объект кликают мышкой
     /// </summary>

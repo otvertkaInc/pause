@@ -33,31 +33,12 @@ public class ShapeRotation : MonoBehaviour
         isFinalRotation = false;
     }
 
-    Vector3 Center()
-    {
-        List<Transform> center = new List<Transform>(GetComponentsInChildren<Transform>());
-        int ind = 0;
-
-        // Предполагается, что RotateCenter у объекта всего один
-        for (int i = 1; i < center.Count; ++i)
-        {
-            if (center[i].name == "RotateCenter")
-            {
-                ind = i;
-                break;
-            }
-        }
-
-        // Все будет работать! Если у объекта нет RotateCenter, то вернется своей собственный центр
-        return center[ind].position;
-    }
-
     void FixedUpdate()
     {
         if (isRotate)
         {
             
-            transform.RotateAround(Center(), Vector3.forward, SpeedRotation);
+            transform.RotateAround(GetComponent<ShapeBehaviour>().Center(), Vector3.forward, SpeedRotation);
         }
             
 
