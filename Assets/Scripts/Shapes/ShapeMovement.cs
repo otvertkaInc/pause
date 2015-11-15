@@ -49,7 +49,9 @@ public class ShapeMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (isMoving)
-            GetComponent<Rigidbody2D>().velocity = direction * Speed;
+        {
+            GetComponent<Rigidbody2D>().velocity = direction*Speed;
+        }
         else
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }

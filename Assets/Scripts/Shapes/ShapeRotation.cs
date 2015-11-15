@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class ShapeRotation : MonoBehaviour
 {
@@ -31,11 +32,28 @@ public class ShapeRotation : MonoBehaviour
     {
         isFinalRotation = false;
     }
-
+    
     void FixedUpdate()
     {
         if (isRotate)
-            transform.Rotate(new Vector3(0f, 0f, SpeedRotation));
+        {
+            List<Transform> center = new List<Transform>(GetComponentsInChildren<Transform>());
+            int ind = 0;
+
+            // Предполагается, что RotateCenter у объекта всего один
+            for (int i = 1; i < center.Count; ++i)
+            {
+                if (center[i].name == "RotateCenter")
+                {
+                    ind = i;
+                    break;
+                }
+            }
+
+            // Все будет работать! Если у объекта нет RotateCenter, то объект будет вращаться вокруг своего собственного центра
+            transform.RotateAround(center[ind].position, Vector3.forward, SpeedRotation);
+        }
+            
 
         List<RotateCheck> rc = new List<RotateCheck>(GetComponentsInChildren<RotateCheck>());
         isFinalRotation = true;
