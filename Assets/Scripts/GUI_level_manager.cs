@@ -54,34 +54,32 @@ public class GUI_level_manager : MonoBehaviour
                 System.Threading.Thread.Sleep(120);
                 fl = !fl;
             }
-            GUI.DrawTexture(new Rect(Screen.width / 35, 230, Screen.width, Screen.height * 11 / 25), Background_btw_lvl, ScaleMode.StretchToFill);
-            GUI.DrawTexture(new Rect(Screen.width / 18 * 4, 310, Screen.width - 240, Screen.height * 5 / 30), StarTexture2D, ScaleMode.StretchToFill);
-            if (Application.loadedLevel == (Application.levelCount - 1))
+            GUI.DrawTexture(new Rect(Screen.width / 35, Screen.height / 3, Screen.width, Screen.height * 11 / 25), Background_btw_lvl, ScaleMode.StretchToFill);
+            GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height /7 * 3, Screen.width  /7 * 2, Screen.height * 5 / 30), StarTexture2D, ScaleMode.StretchToFill);
+           /* if (Application.loadedLevel == (Application.levelCount - 1))
              {
-                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
+                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, Screen.width / 10, Screen.height / 25), "Main menu"))
                  {
                      Application.LoadLevel(0);
                  }
 
-                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 300, 300), "Game complete!"))
+                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, Screen.width / 20, Screen.height / 25), "Game complete!"))
                  {
 
                  }
              }
 
-             else
-             {
-                GUI.DrawTexture(new Rect(Screen.width / 2 + 70 , Screen.height / 2 + 60, 140, 40), Next_lvl, ScaleMode.StretchToFill);
-                if (GUI.Button(new Rect(Screen.width / 2 + 70, Screen.height / 2 + 60, 140, 40), "Next level"))
+             else*/
+                GUI.DrawTexture(new Rect(Screen.width / 20 * 3 , Screen.height / 32 * 20, Screen.width / 4, Screen.height / 18), Next_lvl, ScaleMode.StretchToFill);
+                if (GUI.Button(new Rect(Screen.width / 20 * 3 , Screen.height / 32 * 20, Screen.width / 4, Screen.height / 18), "Next level"))
                  {
                      Application.LoadLevel(Application.loadedLevel + 1);
                  }
-                GUI.DrawTexture(new Rect(Screen.width / 2 - 210, Screen.height / 2 + 60, 140, 40), Next_lvl, ScaleMode.StretchToFill);
-                if (GUI.Button(new Rect(Screen.width / 2 - 210, Screen.height / 2 + 60, 140, 40), "Level complete!"))
+                GUI.DrawTexture(new Rect(Screen.width / 6 * 3, Screen.height / 32 * 20, Screen.width / 5 * 2, Screen.height / 18), Next_lvl, ScaleMode.StretchToFill);
+                if (GUI.Button(new Rect(Screen.width / 6 * 3, Screen.height / 32 * 20, Screen.width / 5 * 2, Screen.height / 18), "Level complete!"))
                  {
 
                  } 
-             }
         }
     }
 
