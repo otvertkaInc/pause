@@ -25,13 +25,13 @@ public class GUI_level_manager : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(Screen.width / 2, 3*Screen.height / 4 + 150, 100, 25), "MoveMode"))
+        if (GUI.Button(new Rect(Screen.width / 2, 3*Screen.height / 10 * 3 , 100, 25), "MoveMode"))
         {
             moveMode = true;
             rotateMode = false;
         }
 
-        if (GUI.Button(new Rect(Screen.width / 2 - 105, 3*Screen.height / 4 + 150, 100, 25), "RoatateMode"))
+        if (GUI.Button(new Rect(Screen.width / 2 - 105, 3*Screen.height / 10 * 3 , 100, 25), "RoatateMode"))
         {
             moveMode = false;
             rotateMode = true;
