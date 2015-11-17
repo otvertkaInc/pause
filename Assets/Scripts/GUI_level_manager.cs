@@ -41,6 +41,7 @@ public class GUI_level_manager : MonoBehaviour
         List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
         GUI.color = Color.yellow;
         GUI.backgroundColor = Color.black;
+        bool fl = true;
         if (isAllTrue(shapes, Sh_r))
         {
             if (flag)
@@ -48,7 +49,11 @@ public class GUI_level_manager : MonoBehaviour
                 flag = false;
                 //FindObjectOfType<levelController>().moveToFinalPos(shapes); // Движение всех фигур к своим финальным позициям
             }
-
+            if (fl)
+            {
+                System.Threading.Thread.Sleep(120);
+                fl = !fl;
+            }
             GUI.DrawTexture(new Rect(Screen.width / 35, 230, Screen.width, Screen.height * 11 / 25), Background_btw_lvl, ScaleMode.StretchToFill);
             GUI.DrawTexture(new Rect(Screen.width / 18 * 4, 310, Screen.width - 240, Screen.height * 5 / 30), StarTexture2D, ScaleMode.StretchToFill);
             if (Application.loadedLevel == (Application.levelCount - 1))
