@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 
 public class GUI_level_manager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GUI_level_manager : MonoBehaviour
     public bool rotateMode;
     public bool moveMode;
     public Texture2D StarTexture2D; // Переименовал
+    public Texture2D Background_btw_lvl;
+    public Texture2D Next_lvl;
+
 
     private bool flag; // флаг
 
@@ -21,13 +25,13 @@ public class GUI_level_manager : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(Screen.width / 4, 3*Screen.height / 4, 100, 25), "MoveMode"))
+        if (GUI.Button(new Rect(Screen.width / 2, 3*Screen.height / 4 + 150, 100, 25), "MoveMode"))
         {
             moveMode = true;
             rotateMode = false;
         }
 
-        if (GUI.Button(new Rect(Screen.width / 4 - 105, 3*Screen.height / 4, 100, 25), "RoatateMode"))
+        if (GUI.Button(new Rect(Screen.width / 2 - 105, 3*Screen.height / 4 + 150, 100, 25), "RoatateMode"))
         {
             moveMode = false;
             rotateMode = true;
@@ -45,32 +49,34 @@ public class GUI_level_manager : MonoBehaviour
                 //FindObjectOfType<levelController>().moveToFinalPos(shapes); // Движение всех фигур к своим финальным позициям
             }
 
-            GUI.Label(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 115, 200, 100), StarTexture2D);
+            GUI.DrawTexture(new Rect(Screen.width / 35, 230, Screen.width, Screen.height * 11 / 25), Background_btw_lvl, ScaleMode.StretchToFill);
+            GUI.DrawTexture(new Rect(Screen.width / 18 * 4, 310, Screen.width - 240, Screen.height * 5 / 30), StarTexture2D, ScaleMode.StretchToFill);
             if (Application.loadedLevel == (Application.levelCount - 1))
-            {
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
-                {
-                    Application.LoadLevel(0);
-                }
-            
-                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 300, 300), "Game complete!"))
-                {
-                
-                }
-            }
-        
-            else
-            {
-                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 200, 25), "Next level"))
-                {
-                    Application.LoadLevel(Application.loadedLevel + 1);
-                }
-            
-                if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 250, 200, 50), "Level complete!"))
-                {
-                
-                }
-            }
+             {
+                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 25), "Main menu"))
+                 {
+                     Application.LoadLevel(0);
+                 }
+
+                 if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 150, 300, 300), "Game complete!"))
+                 {
+
+                 }
+             }
+
+             else
+             {
+                GUI.DrawTexture(new Rect(Screen.width / 2 + 70 , Screen.height / 2 + 60, 140, 40), Next_lvl, ScaleMode.StretchToFill);
+                if (GUI.Button(new Rect(Screen.width / 2 + 70, Screen.height / 2 + 60, 140, 40), "Next level"))
+                 {
+                     Application.LoadLevel(Application.loadedLevel + 1);
+                 }
+                GUI.DrawTexture(new Rect(Screen.width / 2 - 210, Screen.height / 2 + 60, 140, 40), Next_lvl, ScaleMode.StretchToFill);
+                if (GUI.Button(new Rect(Screen.width / 2 - 210, Screen.height / 2 + 60, 140, 40), "Level complete!"))
+                 {
+
+                 } 
+             }
         }
     }
 
