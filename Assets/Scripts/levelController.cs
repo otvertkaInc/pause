@@ -16,28 +16,53 @@ public class levelController : MonoBehaviour
     private string shape;
 
     /// <summary>
+    /// Ограничение на вход в цикл
+    /// </summary>
+    bool inCycle;
+
+    /// <summary>
+    /// Флаг для проверки в скрипте GUI_level_manager.cs
+    /// </summary>
+    public bool flagForGUI_level_manager;
+
+    /// <summary>
+    /// Аналогия isAllTrue(...) из скрипта GUI_level_manager.cs
+    /// </summary>
+    bool allTrue;
+
+    /// <summary>
+    /// Функция сравнения цисел типа float (точность = 0.01f)
+    /// </summary>
+    bool compareFloat(float x, float y, float eps = 0.01f)
+    {
+        return Mathf.Abs(x - y) < eps;
+    }
+
+    /// <summary>
     /// Движение всех фигур к своим финальным позициям (уровень пройден)
     /// </summary>
-    public void moveToFinalPos(List<ShapeMovement> shapes)
+    public void moveToFinalPos(ref bool inCycle, ref bool flagForGUI_level_manager)
     {
-        for (int i = 0; i < shapes.Count; ++i)
+        List<ShapeMovement> shapes = new List<ShapeMovement>(FindObjectsOfType<ShapeMovement>());
+        int countOfRightSh = 0;
+        foreach (ShapeMovement sh in shapes)
         {
-            shapes[i].isMoving = true;
-            Vector3 direction = (GameObject.Find(shapes[i].shape_name + "RightPosition").transform.position - shapes[i].transform.position).normalized;
-            shapes[i].direction = direction;
-            //shapes[i].GetComponent<Rigidbody2D>().velocity = direction * 0.5f;
-            //shapes[i].isMoving = false;
-
-                /*
-                if (shapes[i].GetComponent<ShapeRotation>() != null) 
-                {
-                    List<ShapeRotation> rotates = new List<ShapeRotation>(GameObject.Find(shapes[i].shape_name + "RightPosition").GetComponentsInChildren<ShapeRotation>());
-                    for (int j = 0; j < rotates.Count; ++j)
-                    {
-                        //shapes[i].GetComponent
-                    }
-                }
-                */
+            Vector3 rightPos = GameObject.Find(sh.shape_name + "RightPosition").transform.position;
+            Vector3 direction = rightPos - sh.transform.position; // Здесь как раз таки не нужно использовать .normalized
+            sh.GetComponent<Rigidbody2D>().velocity = direction * 2.5f;
+            if (sh.GetComponent<ShapeRotation>() != null)
+                //sh.transform.eulerAngles = new Vector3(0.0f, sh.transform.rotation.y, sh.transform.rotation.z);
+                sh.transform.eulerAngles = new Vector3(Mathf.LerpAngle(sh.transform.rotation.x, 0.0f, 5 * Time.fixedDeltaTime), sh.transform.rotation.y, sh.transform.rotation.z);
+            if (compareFloat(sh.transform.position.x, rightPos.x) && compareFloat(sh.transform.position.y, rightPos.y))
+            {
+                sh.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                countOfRightSh++;
+            }
+        }
+        if (countOfRightSh == shapes.Count)
+        {
+            inCycle = false; // Ограничение на вход в цикл
+            flagForGUI_level_manager = true; // для проверки в скрипте GUI_level_manager.cs
         }
     }
 
@@ -61,5 +86,20 @@ public class levelController : MonoBehaviour
             circle_changes[i].new_direction = circle_changes[(i + 1) % count_circle].transform.position;
         }
 
+        inCycle = true;
+        flagForGUI_level_manager = false;
+        allTrue = false;
+    }
+
+    void FixedUpdate()
+    {
+        List<ShapeMovement> shapes = new List<ShapeMovement>(FindObjectsOfType<ShapeMovement>());
+        List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
+
+        if (!allTrue && FindObjectOfType<GUI_level_manager>().isAllTrue(shapes, Sh_r)) // Усложнили код, зато isAllTrue уже будет не нужен (намного эффективнее)
+            allTrue = !allTrue;
+
+        if (allTrue && inCycle)
+            moveToFinalPos(ref inCycle, ref flagForGUI_level_manager);
     }
 }
