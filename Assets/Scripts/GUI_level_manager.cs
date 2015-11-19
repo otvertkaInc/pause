@@ -12,10 +12,45 @@ public class GUI_level_manager : MonoBehaviour
     public Texture2D Background_btw_lvl;
     public Texture2D Next_lvl;
 
+    public int click_count = 0; //считает, сколько кликов было сделано
+    public int min_level_click = 4; //АХТУНГ! для каждого уровня переменная будет инициализироваться по разному. 
+                                     //она символизирует , сколько минимально кликов нужно сделать в худшем случае, чтобы закончить уровень.
+    public int max3_level_click = 8;//соответственно, крайнее количество кликов на 3 звезды ;)
+    public int min2_level_click = 12;//...на 2 звезды...
+    public int min3_level_click = 15;//..на 1 звезду...
+    //что будет , если пользователь окажется крайним уникумом и не поймет что от него требуется, потратив дохера кликов вустую, мы решим потом. Пока что я этот вариант исключил 
+    //что касается очков, они храниться будут ... в файле
+    public int max_points = 250; // это максимальное количество очков, которое юзер получит за min_level_click кликов. Для каждого левела он разный...наверное.
+    //за каждый лишний клик мы будем отнимать какое то кол-во очков, и это будет делать переменная
+    public int point_waste_click = 12;
+    //я считаю, это оптимальная система, правда потом можно будет учитывать и время, за которое пользователь прошел левел
+
     /// <summary>
     /// Аналогия isAllTrue(...)
     /// </summary>
     bool flag;
+
+
+    void Awake()
+    {
+        if (!Directory.Exists("Assets/Textfiles"))
+        {
+            Directory.CreateDirectory("Assets/Textfiles");
+        }
+
+        if (!File.Exists("Assets/Textfiles/levelscores.ini"))
+        {
+            Debug.Log("create file");
+            File.Create("Assets/Textfiles/levelscores.ini");
+        }
+
+        if (!File.Exists("Assets/Textfiles/totalscore.ini")) //для всех уровней сумма очков
+        {
+            Debug.Log("create file");
+            File.Create("Assets/Textfiles/totalscore.ini");
+        }
+
+    }
 
     void Start()
     {
@@ -52,6 +87,30 @@ public class GUI_level_manager : MonoBehaviour
         if (/*isAllTrue(shapes, Sh_r) && */flag) // Теперь проверка условия будет такой. В этом флаге скрывается isAllTrue,
         {                                        // но зато эта огромная фигня не вызывается по сто раз.
                                                  // А свидетельство того, что это равносильно isAllTrue, написано в скрипте levelController.cs
+            
+            //тут начинается код, связанный с очками
+            int waste_click = click_count - min_level_click; //сколько лишних кликов
+            int score = max_points - waste_click * point_waste_click;
+            if (score < 0)
+                score = 0;
+            List<string> sc = new List<string>(File.ReadAllLines("Assets/Textfiles/levelscores.ini"));
+            sc.Add(score.ToString());
+            File.WriteAllLines("Assets/Textfiles/levelscores.ini", sc.ToArray());
+
+            List<string> t_s = new List<string>(File.ReadAllLines("Assets/Textfiles/totalscore.ini"));
+            int ss = score;
+            if (t_s.Count != 0)
+            {
+                Debug.Log("ts != null");
+                ss = int.Parse(t_s[0]);
+                ss += score;
+            }
+      
+            sc.Add(ss.ToString());
+            File.WriteAllLines("Assets/Textfiles/totalscore.ini", sc.ToArray());
+
+            //тут он заканчивается
+
             if (fl)
             {
                 System.Threading.Thread.Sleep(120);

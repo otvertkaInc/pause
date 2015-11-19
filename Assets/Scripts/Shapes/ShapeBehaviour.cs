@@ -56,7 +56,7 @@ public class ShapeBehaviour : MonoBehaviour
 
         ShapeRotation rot = GetComponent<ShapeRotation>();
         ShapeMovement sh = GetComponent<ShapeMovement>();
-
+        ts.click_count++;
         if (ts.need_mov)
         {
             if (ts.moveMode && (sh != null))
