@@ -56,7 +56,11 @@ public class ShapeBehaviour : MonoBehaviour
 
         ShapeRotation rot = GetComponent<ShapeRotation>();
         ShapeMovement sh = GetComponent<ShapeMovement>();
-        ts.click_count++;
+
+        List<ShapeMovement> shapes = new List<ShapeMovement>(FindObjectsOfType<ShapeMovement>());
+        List<ShapeRotation> Sh_r = new List<ShapeRotation>(FindObjectsOfType<ShapeRotation>());
+        if (!ts.isAllTrue(shapes, Sh_r))
+            ts.click_count++;
         if (ts.need_mov)
         {
             if (ts.moveMode && (sh != null))

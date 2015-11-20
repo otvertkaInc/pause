@@ -8,16 +8,18 @@ public class GUI_level_manager : MonoBehaviour
 
     public bool rotateMode;
     public bool moveMode;
-    public Texture2D StarTexture2D; // Переименовал
+    public Texture2D StarTexture3_2D;
+    public Texture2D StarTexture2_2D;
+    public Texture2D StarTexture1_2D;
     public Texture2D Background_btw_lvl;
     public Texture2D Next_lvl;
 
     public int click_count = 0; //считает, сколько кликов было сделано
-    public int min_level_click = 4; //АХТУНГ! для каждого уровня переменная будет инициализироваться по разному. 
+    public int min_level_click = 3; //АХТУНГ! для каждого уровня переменная будет инициализироваться по разному. 
                                      //она символизирует , сколько минимально кликов нужно сделать в худшем случае, чтобы закончить уровень.
     public int max3_level_click = 8;//соответственно, крайнее количество кликов на 3 звезды ;)
-    public int min2_level_click = 12;//...на 2 звезды...
-    public int min3_level_click = 15;//..на 1 звезду...
+    public int max2_level_click = 12;//...на 2 звезды...
+    public int max1_level_click = 15;//..на 1 звезду...
     //что будет , если пользователь окажется крайним уникумом и не поймет что от него требуется, потратив дохера кликов вустую, мы решим потом. Пока что я этот вариант исключил 
     //что касается очков, они храниться будут ... в файле
     public int max_points = 250; // это максимальное количество очков, которое юзер получит за min_level_click кликов. Для каждого левела он разный...наверное.
@@ -30,6 +32,7 @@ public class GUI_level_manager : MonoBehaviour
     /// </summary>
     bool flag;
 
+    bool flag_score;
 
     void Awake()
     {
@@ -57,6 +60,7 @@ public class GUI_level_manager : MonoBehaviour
         rotateMode = false;
         moveMode = true;
 
+        flag_score = true;
         flag = false;
     }
 
@@ -84,31 +88,37 @@ public class GUI_level_manager : MonoBehaviour
         if (FindObjectOfType<levelController>().flagForGUI_level_manager) // Переменной flag переприсваиваем значение flag1 хотя бы один раз,
             flag = true;                                                  // т. к. неизвестно что там будет дальше с переменной flag1, которая совсем из другого скрипта
 
-        if (/*isAllTrue(shapes, Sh_r) && */flag) // Теперь проверка условия будет такой. В этом флаге скрывается isAllTrue,
+        if (flag) // Теперь проверка условия будет такой. В этом флаге скрывается isAllTrue,
         {                                        // но зато эта огромная фигня не вызывается по сто раз.
                                                  // А свидетельство того, что это равносильно isAllTrue, написано в скрипте levelController.cs
-            
+
             //тут начинается код, связанный с очками
-            int waste_click = click_count - min_level_click; //сколько лишних кликов
-            int score = max_points - waste_click * point_waste_click;
-            if (score < 0)
-                score = 0;
-            List<string> sc = new List<string>(File.ReadAllLines("Assets/Textfiles/levelscores.ini"));
-            sc.Add(score.ToString());
-            File.WriteAllLines("Assets/Textfiles/levelscores.ini", sc.ToArray());
-
-            List<string> t_s = new List<string>(File.ReadAllLines("Assets/Textfiles/totalscore.ini"));
-            int ss = score;
-            if (t_s.Count != 0)
+            if (flag_score)
             {
-                Debug.Log("ts != null");
-                ss = int.Parse(t_s[0]);
-                ss += score;
-            }
-      
-            sc.Add(ss.ToString());
-            File.WriteAllLines("Assets/Textfiles/totalscore.ini", sc.ToArray());
+                flag_score = !flag_score;
+                Debug.Log("clicks = ");
+                Debug.Log(click_count);
+                int waste_click = click_count - min_level_click; //сколько лишних кликов
+                int score = max_points - (waste_click * point_waste_click);
+                Debug.Log(score);
+                if (score < 0)
+                    score = 0;
+                List<string> sc = new List<string>(File.ReadAllLines("Assets/Textfiles/levelscores.ini"));
+                sc.Add(score.ToString());
+                File.WriteAllLines("Assets/Textfiles/levelscores.ini", sc.ToArray());
 
+                List<string> t_s = new List<string>(File.ReadAllLines("Assets/Textfiles/totalscore.ini"));
+                int ss = score;
+                if (t_s.Count != 0)
+                {
+                    Debug.Log("ts != null");
+                    ss = int.Parse(t_s[0]);
+                    ss += score;
+                }
+
+                sc.Add(ss.ToString());
+                File.WriteAllLines("Assets/Textfiles/totalscore.ini", sc.ToArray());
+            }
             //тут он заканчивается
 
             if (fl)
@@ -118,7 +128,12 @@ public class GUI_level_manager : MonoBehaviour
             }
 
             GUI.DrawTexture(new Rect(Screen.width / 35, Screen.height / 3, Screen.width, Screen.height * 11 / 25), Background_btw_lvl, ScaleMode.StretchToFill);
-            GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture2D, ScaleMode.StretchToFill);
+            if (click_count <= max3_level_click)
+                GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture3_2D, ScaleMode.StretchToFill);
+            else if ((click_count > max3_level_click) && (click_count <= max2_level_click))
+                GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture2_2D, ScaleMode.StretchToFill);
+            else if ((click_count > max2_level_click) && (click_count <= max1_level_click))
+                GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture1_2D, ScaleMode.StretchToFill);
             if (Application.loadedLevel == (Application.levelCount - 1))
             {
                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, Screen.width / 10, Screen.height / 25), "Main menu"))
