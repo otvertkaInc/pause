@@ -13,6 +13,7 @@ public class GUI_level_manager : MonoBehaviour
     public Texture2D StarTexture1_2D;
     public Texture2D Background_btw_lvl;
     public Texture2D Next_lvl;
+    public Texture2D looser_star;
 
     public int click_count = 0; // считает, сколько кликов было сделано
     public int min_level_click = 3; // АХТУНГ! для каждого уровня переменная будет инициализироваться по разному. 
@@ -134,6 +135,7 @@ public class GUI_level_manager : MonoBehaviour
                 GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture2_2D, ScaleMode.StretchToFill);
             else if ((click_count > max2_level_click) && (click_count <= max1_level_click))
                 GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), StarTexture1_2D, ScaleMode.StretchToFill);
+            else GUI.DrawTexture(new Rect(Screen.width / 12 * 4, Screen.height / 7 * 3, Screen.width / 7 * 2, Screen.height * 5 / 30), looser_star, ScaleMode.StretchToFill);
             if (Application.loadedLevel == (Application.levelCount - 1))
             {
                 if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, Screen.width / 10, Screen.height / 25), "Main menu"))
