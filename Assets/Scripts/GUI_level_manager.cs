@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class GUI_level_manager : MonoBehaviour
 {
@@ -99,7 +100,7 @@ public class GUI_level_manager : MonoBehaviour
                 flag_score = !flag_score;
                 Debug.Log("clicks = ");
                 Debug.Log(click_count);
-                int waste_click = click_count - min_level_click; //сколько лишних кликов
+                int waste_click = (int)((click_count - min_level_click) / 2); //сколько лишних кликов
                 int score = max_points - (waste_click * point_waste_click);
                 Debug.Log(score);
                 if (score < 0)
